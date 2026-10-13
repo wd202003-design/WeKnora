@@ -696,6 +696,7 @@ import { parseWikiToolReferences } from '@/utils/wikiToolReferences';
 import {
   buildManualMarkdown,
   formatManualTitle,
+  collectManualPreferredKbIds,
   replaceIncompleteMermaidWithPlaceholder,
   prepareStreamingMermaidMarkdown,
   extractMermaidCodes,
@@ -3133,6 +3134,7 @@ const handleAddToKnowledge = (answerEvent: any) => {
 
   uiStore.openManualEditor({
     mode: 'create',
+    preferredKbIds: collectManualPreferredKbIds(props.session?.knowledge_references),
     title: manualTitle,
     content: manualContent,
     status: 'draft',
