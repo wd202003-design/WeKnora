@@ -168,6 +168,15 @@ type AgentConfig struct {
 	// picked, already checked to be inside KnowledgeBases (runtime only;
 	// rendered into runtime_context as a retrieval hint).
 	QuestionOrigin *QuestionOrigin `json:"-"`
+	// ChatUploads are server-resolved files attached to this session's chat
+	// (this turn, plus earlier turns). Runtime only: the model never supplies
+	// them. Tabular csv/xlsx/xls entries are registered as document handles
+	// for data_schema and data_analysis.
+	ChatUploads MessageAttachments `json:"-"`
+	// ChatUploadTenantID is the session owner's tenant. Temporary documents
+	// live there, which can differ from the agent owner's tenant when the
+	// agent is shared. Zero means the tenant is not known.
+	ChatUploadTenantID uint64 `json:"-"`
 	// SharedAgentReadOnly prevents a shared agent from mutating resources in
 	// its source workspace. It is set from the verified share relation, never
 	// inferred from a client-provided tenant ID.

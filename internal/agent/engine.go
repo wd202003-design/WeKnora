@@ -82,6 +82,9 @@ type AgentEngine struct {
 	allowSteerOverrun bool // one extra ReAct round after a loop-end inject past MaxIterations
 	steerOverruns     int  // how many times this turn has already used the extra round
 	workspaceLayout   sandbox.WorkspaceLayout
+	// chatAttachments is the allowlist of chat-uploaded spreadsheets shared
+	// with data_schema / data_analysis. Nil when those tools are not registered.
+	chatAttachments *agenttools.ChatTabularAttachments
 }
 
 // maxSteerOverruns caps loop-end injects past MaxIterations. One extra round
@@ -144,6 +147,29 @@ func NewAgentEngine(
 // user picked for this turn; nil clears it.
 func (e *AgentEngine) SetQuestionOrigin(origin *QuestionOriginInfo) {
 	e.questionOrigin = origin
+}
+
+// BindChatAttachments shares the tool allowlist with the prompt. The store is
+// filled by the service before Execute; rendering registers each ID as a dN
+// document handle.
+func (e *AgentEngine) BindChatAttachments(store *agenttools.ChatTabularAttachments) {
+	if e == nil {
+		return
+	}
+	e.chatAttachments = store
+}
+
+// SetChatAttachments replaces the turn's chat-upload allowlist. It creates a
+// store when the engine was built without data-analysis tools, which tests use
+// to assert handle registration. Production binds the store the tools hold.
+func (e *AgentEngine) SetChatAttachments(items []agenttools.ChatTabularAttachment) {
+	if e == nil {
+		return
+	}
+	if e.chatAttachments == nil {
+		e.chatAttachments = agenttools.NewChatTabularAttachments()
+	}
+	e.chatAttachments.Set(items)
 }
 
 // SetPinnedMentions sets per-turn @mention scope for MCP services and skills.
