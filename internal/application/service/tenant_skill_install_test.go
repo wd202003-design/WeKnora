@@ -3382,6 +3382,9 @@ func (s *installModelService) GetChatModel(_ context.Context, modelID string) (c
 	}
 	return installChat{id: modelID}, nil
 }
+func (s *installModelService) GetChatModelForTenant(ctx context.Context, modelId string, _ uint64) (chat.Chat, error) {
+	return s.GetChatModel(ctx, modelId)
+}
 func (s *installModelService) GetVLMModel(context.Context, string) (vlm.VLM, error) { return nil, nil }
 func (s *installModelService) GetASRModel(context.Context, string) (asr.ASR, error) { return nil, nil }
 
