@@ -281,7 +281,7 @@ WeMM 的模板已经包含所需特殊 token，保留 vLLM 的 `add_special_toke
 
 ## 内置厂商
 
-内置 29 个厂商，另可通过 Ollama 接入本地模型。各厂商支持的模型类型如下（✓ 表示支持）：
+内置 30 个厂商，另可通过 Ollama 接入本地模型。各厂商支持的模型类型如下（✓ 表示支持）：
 
 | 厂商 | ID | 对话 | 向量 | 重排 | 视觉 | 语音 |
 | --- | --- | :-: | :-: | :-: | :-: | :-: |
@@ -300,6 +300,7 @@ WeMM 的模板已经包含所需特殊 token，保留 vLLM 的 `add_special_toke
 | 七牛云 | `qiniu` | ✓ | | | | |
 | 美团 LongCat | `longcat` | ✓ | | | | |
 | 腾讯云 LKEAP | `lkeap` | ✓ | | ✓ | | |
+| 讯飞星辰 MaaS | `iflytek` | ✓ | | | | |
 | DeepSeek | `deepseek` | ✓ | | | | |
 | OpenAI | `openai` | ✓ | ✓ | | ✓ | ✓ |
 | Azure OpenAI | `azure_openai` | ✓ | ✓ | | ✓ | |
