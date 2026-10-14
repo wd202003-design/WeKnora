@@ -29,7 +29,7 @@ func TestResolveChatModelIDRequiresConfiguredAgentModel(t *testing.T) {
 		SummaryModelID: "builtin-chat",
 	}
 
-	modelID, err := svc.resolveChatModelID(context.Background(), req, nil, nil)
+	modelID, _, err := svc.resolveChatModelID(context.Background(), req, nil, nil)
 
 	require.Error(t, err)
 	assert.Empty(t, modelID)
@@ -50,7 +50,7 @@ func TestResolveChatModelIDRejectsUnavailableConfiguredAgentModel(t *testing.T) 
 		},
 	}
 
-	modelID, err := svc.resolveChatModelID(context.Background(), req, nil, nil)
+	modelID, _, err := svc.resolveChatModelID(context.Background(), req, nil, nil)
 
 	require.Error(t, err)
 	assert.Empty(t, modelID)
@@ -78,7 +78,7 @@ func TestResolveChatModelIDUsesValidConfiguredAgentModel(t *testing.T) {
 		},
 	}
 
-	modelID, err := svc.resolveChatModelID(context.Background(), req, nil, nil)
+	modelID, _, err := svc.resolveChatModelID(context.Background(), req, nil, nil)
 
 	require.NoError(t, err)
 	assert.Equal(t, "agent-chat", modelID)
@@ -110,7 +110,7 @@ func TestResolveChatModelIDRejectsNonChatSummaryModelOverride(t *testing.T) {
 		SummaryModelID: "rerank-only",
 	}
 
-	modelID, err := svc.resolveChatModelID(context.Background(), req, nil, nil)
+	modelID, _, err := svc.resolveChatModelID(context.Background(), req, nil, nil)
 
 	require.NoError(t, err)
 	assert.Equal(t, "agent-chat", modelID)
@@ -142,7 +142,7 @@ func TestResolveChatModelIDUsesValidSummaryModelOverride(t *testing.T) {
 		SummaryModelID: "override-chat",
 	}
 
-	modelID, err := svc.resolveChatModelID(context.Background(), req, nil, nil)
+	modelID, _, err := svc.resolveChatModelID(context.Background(), req, nil, nil)
 
 	require.NoError(t, err)
 	assert.Equal(t, "override-chat", modelID)
@@ -172,7 +172,7 @@ func TestResolveChatModelIDWikiFixerFallsBackToKnowledgeBaseModel(t *testing.T) 
 		},
 	}
 
-	modelID, err := svc.resolveChatModelID(context.Background(), req, []string{"wiki-kb"}, nil)
+	modelID, _, err := svc.resolveChatModelID(context.Background(), req, []string{"wiki-kb"}, nil)
 
 	require.NoError(t, err)
 	assert.Equal(t, "wiki-chat", modelID)
@@ -196,7 +196,7 @@ func TestResolveChatModelIDWikiFixerFallsBackToAvailableModel(t *testing.T) {
 		},
 	}
 
-	modelID, err := svc.resolveChatModelID(context.Background(), req, nil, nil)
+	modelID, _, err := svc.resolveChatModelID(context.Background(), req, nil, nil)
 
 	require.NoError(t, err)
 	assert.Equal(t, "system-chat", modelID)
@@ -223,7 +223,7 @@ func TestResolveChatModelIDIgnoresOverrideForSharedAgents(t *testing.T) {
 		SharedAgentReadOnly: true,
 	}
 
-	modelID, err := svc.resolveChatModelID(context.Background(), req, nil, nil)
+	modelID, _, err := svc.resolveChatModelID(context.Background(), req, nil, nil)
 
 	require.NoError(t, err)
 	assert.Equal(t, "agent-chat", modelID)
