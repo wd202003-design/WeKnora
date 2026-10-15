@@ -1316,6 +1316,8 @@ export default {
       enabled: 'エージェントを有効化しました'
     },
     editor: {
+      assistantChanged: 'アシスタントがこのエージェントを変更しました。最新の設定を確認するには、開き直してください。',
+      assistantDeleted: 'アシスタントがこのエージェントを削除しました。',
       reasoningEffortUnsupported: '選択中のモデルは思考に対応していません。「オフ」以外は無視されます。',
       reasoningEffortAlwaysOn: '選択中のモデルは常に思考します。オフにはできず、強度のみ調整できます。',
       createTitle: 'エージェントを作成',
@@ -6107,13 +6109,19 @@ export default {
     assistant: {
       title: 'WeKnora アシスタント',
       newConversation: '新しい会話',
+      history: '会話履歴',
+      untitledConversation: '無題の会話',
+      historyEmpty: '会話履歴はありません',
+      historyFailed: '会話履歴を読み込めませんでした',
+      loadMore: 'さらに読み込む',
       resize: 'アシスタントの幅を調整',
       layout: {
         dock: '右側に固定',
         float: 'フローティング表示にする',
       },
       welcomeTitle: '何をお手伝いしましょうか？',
-      welcomeDesc: 'WeKnora の使い方にお答えするほか、ワークスペースのドキュメント解析、ナレッジベースの履歴、Wiki の問題を確認・対応できます。変更の前に確認するかどうかは、入力欄の下の権限レベルで決まります。',
+      agentWelcomeDesc: 'このエージェントの設定を確認したり、モデルを変更したり、検索可能なナレッジベースを確認できます。',
+      welcomeDesc: 'WeKnora の使い方にお答えするほか、ワークスペースのドキュメント解析、ナレッジベースの履歴、Wiki の問題を確認・対応し、エージェントの作成や設定もお手伝いできます。変更の前に確認するかどうかは、入力欄の下の権限レベルで決まります。',
       startFailed: 'アシスタントを起動できませんでした。もう一度お試しください。',
       askAboutDocument: '{name}に聞く',
       access: {
@@ -6141,6 +6149,9 @@ export default {
       detachedTip: 'クリックして現在のページを含める：{path}'
     },
     starters: {
+      agentConfig: 'このエージェントの設定を確認して',
+      agentModel: 'モデルを変更して',
+      agentKnowledge: 'どのナレッジベースを検索できる？',
       wikiIssues: 'このページの未対応の問題は？',
       wikiSummary: 'この Wiki ページを要約して',
       documentStatus: 'このドキュメントの解析状況は？',
@@ -6148,7 +6159,8 @@ export default {
       failedDocuments: 'このナレッジベースで解析に失敗したドキュメントは？',
       recentActivity: 'このナレッジベースの最近の変更は？',
       formats: 'WeKnora はどのドキュメント形式に対応していますか？',
-      createWiki: 'Wiki ナレッジベースの作り方は？'
+      createWiki: 'Wiki ナレッジベースの作り方は？',
+      agents: 'どんなエージェントがあり、それぞれどのモデルを使っていますか？'
     }
   },
   assistantSettings: {
