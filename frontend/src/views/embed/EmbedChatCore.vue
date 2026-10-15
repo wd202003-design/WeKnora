@@ -343,11 +343,17 @@ const fetchSuggestedQuestions = async () => {
   }
 }
 
-const onSendMsg = (query: string, imageFiles: File[] = [], attachmentFiles: File[] = []) => {
+const onSendMsg = (
+  query: string,
+  imageFiles: File[] = [],
+  attachmentFiles: File[] = [],
+  onPrepared?: () => void,
+) => {
   void sendMsg(query, {
     webSearchEnabled: webSearchEnabled.value,
     imageFiles,
     attachmentFiles,
+    onPrepared,
   })
 }
 
