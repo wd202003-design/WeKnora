@@ -5452,6 +5452,9 @@ export default {
     upload: 'Загрузить файл'
   },
   mentionDetail: {
+    pendingFiles: 'Файлов к добавлению: {count}',
+    fileAlreadyAdded: 'Уже добавлен',
+    finishFileSelection: 'Сначала подтвердите или отмените выбор файлов.',
     readOnlyFromAgent: 'Только чтение (от агента)',
     faqCount: '{count} вопросов и ответов',
     kbCount: '{count} документов',
