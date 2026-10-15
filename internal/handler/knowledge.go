@@ -1479,7 +1479,12 @@ func (h *KnowledgeHandler) resolveGalleryConfig(ctx context.Context, kbID string
 		if userID, ok := types.UserIDFromContext(ctx); ok && userID != "" {
 			if u, err := h.userSvc.GetUserByID(ctx, userID); err == nil && u != nil && u.Preferences.Gallery != nil {
 				g := u.Preferences.Gallery
-				userTier = &types.GalleryPolicyTier{Mode: g.Mode, Status: g.Status}
+				userTier = &types.GalleryPolicyTier{
+					Mode:      g.Mode,
+					Status:    g.Status,
+					ViewMode:  g.ViewMode,
+					ThumbCols: g.ThumbCols,
+				}
 			}
 		}
 	}
@@ -1516,6 +1521,8 @@ func (h *KnowledgeHandler) GetGalleryConfig(c *gin.Context) {
 			"attributes":        resolved.Attributes,
 			"mode":              resolved.Mode,
 			"status":            status,
+			"view_mode":         resolved.ViewMode,
+			"thumb_cols":        resolved.ThumbCols,
 		},
 	})
 }
